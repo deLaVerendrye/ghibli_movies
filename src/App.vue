@@ -1,23 +1,45 @@
 <script>
 
 import Movie_card from './components/movie_card.vue'
+import rows from './components/rows.vue'
 
 export default{
     data() {
         return {
-            movies: null
+            movies: null,
+            grouped_movies: null
         };
     },
     methods: {
         async fetchData() {
             const movie_datas = await fetch("https://ghibliapi.herokuapp.com/films/");
             this.movies = await movie_datas.json();
+            this.groupMovies()
+        },
+        groupMovies(){
+          let groups = [];
+          let grouped_movies = [];
+          this.movies.forEach(data => {
+            if(groups.length < 4){
+              groups.push(data)
+              if(data === this.movies[this.movies.length -1]){
+                grouped_movies.push(groups)
+                groups = []
+              }
+            }
+            else if(groups.length == 4){
+              grouped_movies.push(groups)
+              groups = []
+              groups.push(data)
+            }
+          });
+          this.grouped_movies = grouped_movies
         }
     },
     mounted() {
         this.fetchData();
     },
-    components: { Movie_card }
+    components: { Movie_card, rows }
 }
 </script>
 
@@ -36,10 +58,10 @@ export default{
       <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
     </li>
   </ul>
-  <h1 v-if="!movies" >Loading...</h1>
-  <div v-else class="row">  
-    <div v-for="movie in movies" class="col-lg-2 m-3">
-      <Movie_card :title="movie.title" :director="movie.director" :image_src="movie.image" :date_release="movie.release_date" />
+  <h1 v-if="!grouped_movies" >Loading...</h1>
+  <div v-else class="custom-row">
+    <div v-for="movies in grouped_movies" class="row m-3 justify-content-center" >
+      <rows :movies="movies" />
     </div>
   </div>
 
@@ -57,6 +79,11 @@ a:hover{
   color:aqua;
   transition: ease-in-out;
   transition-duration: 500ms;
+}
+
+.custom-row{
+  padding: 0;
+  width: fit-content;
 }
 
 </style>
