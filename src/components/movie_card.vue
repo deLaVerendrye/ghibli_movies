@@ -10,7 +10,7 @@ export default{
 </script>
 
 <template>
-    <div class="card" style="width: 15rem;">
+    <div class="card m-2" style="width: 15rem;">
         <div class="image_div" >
             <img :src="image_src" :alt="title + ' poster'" class="card-img-top">
         </div>
@@ -49,6 +49,10 @@ img:hover{
     overflow: hidden;
     max-height: 30rem;
     background-color: #39321a;
+}
+
+.card:hover{
+    cursor: pointer;
 }
 
 .card-body{

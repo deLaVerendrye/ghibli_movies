@@ -7,7 +7,8 @@ export default{
     data() {
         return {
             movies: null,
-            grouped_movies: null
+            grouped_movies: null,
+            width: window.innerWidth
         };
     },
     methods: {
@@ -17,17 +18,20 @@ export default{
             this.groupMovies()
         },
         groupMovies(){
+          let size = this.width >= 768 ? 2 : 1
+          size = this.width >= 992 ? 4 : size
+
           let groups = [];
           let grouped_movies = [];
           this.movies.forEach(data => {
-            if(groups.length < 4){
+            if(groups.length < size){
               groups.push(data)
               if(data === this.movies[this.movies.length -1]){
                 grouped_movies.push(groups)
                 groups = []
               }
             }
-            else if(groups.length == 4){
+            else if(groups.length == size){
               grouped_movies.push(groups)
               groups = []
               groups.push(data)
@@ -59,8 +63,8 @@ export default{
     </li>
   </ul>
   <h1 v-if="!grouped_movies" >Loading...</h1>
-  <div v-else class="custom-row">
-    <div v-for="movies in grouped_movies" class="row m-3 justify-content-center" >
+  <div v-else class="custom-row m-auto">
+    <div v-for="movies in grouped_movies" class="row m-2 justify-content-center" >
       <rows :movies="movies" />
     </div>
   </div>
