@@ -18,8 +18,9 @@ export default{
             this.groupMovies()
         },
         groupMovies(){
-          let size = this.width >= 768 ? 2 : 1
-          size = this.width >= 992 ? 4 : size
+          let size = this.width >= 576 ? 2 : 1
+          size = this.width >= 992 ? 3 : size
+          size = this.width >= 1200 ? 4 : size
 
           let groups = [];
           let grouped_movies = [];
@@ -38,10 +39,19 @@ export default{
             }
           });
           this.grouped_movies = grouped_movies
+        },
+        setWidth(){
+          this.width = window.innerWidth
         }
     },
+    watch: {
+      width(){
+        this.groupMovies()
+      }
+    },
     mounted() {
-        this.fetchData();
+        this.fetchData()
+        window.addEventListener('resize', this.setWidth)
     },
     components: { Movie_card, rows }
 }
