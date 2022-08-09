@@ -8,7 +8,8 @@ export default{
         return {
             movies: null,
             grouped_movies: null,
-            width: window.innerWidth
+            width: window.innerWidth,
+            search: ""
         };
     },
     methods: {
@@ -21,13 +22,17 @@ export default{
           let size = this.width >= 576 ? 2 : 1
           size = this.width >= 992 ? 3 : size
           size = this.width >= 1200 ? 4 : size
+          // size = this.filteredMovies.length < 4 ? 3 : size
+          // size = this.filteredMovies.length < 3 ? 2 : size
+          // size = this.filteredMovies.length < 2 ? 1 : size
 
           let groups = [];
           let grouped_movies = [];
-          this.movies.forEach(data => {
+
+          this.filteredMovies.forEach(data => {
             if(groups.length < size){
               groups.push(data)
-              if(data === this.movies[this.movies.length -1]){
+              if(data === this.filteredMovies[this.filteredMovies.length -1]){
                 grouped_movies.push(groups)
                 groups = []
               }
@@ -39,6 +44,7 @@ export default{
             }
           });
           this.grouped_movies = grouped_movies
+          console.log(this.filteredMovies)
         },
         setWidth(){
           this.width = window.innerWidth
@@ -47,35 +53,41 @@ export default{
     watch: {
       width(){
         this.groupMovies()
+      },
+      search(){
+        this.groupMovies()
       }
     },
     mounted() {
         this.fetchData()
         window.addEventListener('resize', this.setWidth)
     },
+    computed: {
+      filteredMovies(){
+        let movies = [];
+        this.movies.forEach(element => {
+          element.title.toLowerCase().includes(this.search.toLowerCase()) ? movies.push(element) : null
+        })
+        return movies
+      }
+    },
     components: { Movie_card, rows }
 }
 </script>
 
 <template>
-  <ul class="nav">
+  <ul class="nav py-2 px-4">
     <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="#">Active</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      <div class="input-group mb-3">
+        <button class="btn btn-secondary" type="button" id="button-addon1">Button</button>
+        <input type="text" v-model="search"  class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+      </div>
     </li>
   </ul>
   <h1 v-if="!grouped_movies" >Loading...</h1>
   <div v-else class="custom-row m-auto">
-    <div v-for="movies in grouped_movies" class="row m-2 justify-content-center" >
-      <rows :movies="movies" />
+    <div v-for="movies in grouped_movies" class="row m-2 justify-content-center">
+      <rows :movies="movies" :length="filteredMovies.length"/>
     </div>
   </div>
 

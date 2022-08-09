@@ -1,5 +1,14 @@
-body {
-  background-image: url("https://www.w3schools.com/cssref/paper.gif");
-  background-color: #716844 !important;
+.bg-image {
+  background-image: url("https://studioghiblimovies.com/wp-content/uploads/2020/03/p08192c7.jpg");
+  filter: blur(8px);
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: -1;
 }
-/*# sourceMappingURL=style.css.map */
+
+.container-sm {
+  background-image: rgb(0, 0, 0);
+  background-image: rgba(0, 0, 0, 0.4);
+}/*# sourceMappingURL=style.css.map */

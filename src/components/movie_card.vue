@@ -4,7 +4,7 @@ export default{
         image_src: String,
         title: String,
         director: String,
-        date_release: String
+        date_release: String,
     }
 }
 </script>
@@ -38,6 +38,7 @@ img:hover{
     transition: ease-in-out;
     transition-duration: 300ms;
 }
+
 .image_div{
     height: 20rem;
     max-height: 20rem;
