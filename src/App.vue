@@ -25,26 +25,21 @@ export default{
           // size = this.filteredMovies.length < 4 ? 3 : size
           // size = this.filteredMovies.length < 3 ? 2 : size
           // size = this.filteredMovies.length < 2 ? 1 : size
-
           let groups = [];
           let grouped_movies = [];
 
           this.filteredMovies.forEach(data => {
-            if(groups.length < size){
-              groups.push(data)
-              if(data === this.filteredMovies[this.filteredMovies.length -1]){
-                grouped_movies.push(groups)
-                groups = []
-              }
+            groups.push(data)
+            if(data === this.filteredMovies[this.filteredMovies.length -1]){
+              grouped_movies.push(groups)
+              groups = []
             }
             else if(groups.length == size){
               grouped_movies.push(groups)
               groups = []
-              groups.push(data)
             }
           });
           this.grouped_movies = grouped_movies
-          console.log(this.filteredMovies)
         },
         setWidth(){
           this.width = window.innerWidth
