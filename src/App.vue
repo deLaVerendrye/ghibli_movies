@@ -71,11 +71,10 @@ export default{
 </script>
 
 <template>
-  <ul class="nav py-2 px-4">
+  <ul class="nav py-2 px-4 justify-content-center">
     <li class="nav-item">
-      <div class="input-group mb-3">
-        <button class="btn btn-secondary" type="button" id="button-addon1">Button</button>
-        <input type="text" v-model="search"  class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+      <div class="input-group">
+        <input type="text" v-model="search"  class="form-control custom-input" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
       </div>
     </li>
   </ul>
@@ -105,6 +104,24 @@ a:hover{
 .custom-row{
   padding: 0;
   width: fit-content;
+}
+.custom-input{
+  width: 50ch!important;
+}
+
+
+@media only screen and (max-width: 992px){
+  .custom-input{
+    width: 40ch!important;
+  }
+
+}
+
+@media only screen and (max-width: 576px){
+  .custom-input{
+    width: 30ch!important;
+  }
+
 }
 
 </style>
