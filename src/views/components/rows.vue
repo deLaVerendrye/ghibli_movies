@@ -22,8 +22,8 @@ export default{
 </script>
 
 <template>
-    <router-link :to="{name: 'movie'} + '/12345'" custom v-slot="{navigate}">    
-        <div v-for="movie in movies" :class=" length > 4 ? 'col-xl-3 col-lg-4 col-md-6 col-sm-6 col-xs-12' : 'col'"  @click="navigate">
+    <router-link v-for="movie in movies" :to="{ name: 'movie', params: { movieId: movie.id} }" custom v-slot="{navigate}">    
+        <div :class=" length > 4 ? 'col-xl-3 col-lg-4 col-md-6 col-sm-6 col-xs-12' : 'col'"  @click="navigate">
             <movie_card :title="movie.title" :director="movie.director" :image_src="movie.image" :date_release="movie.release_date" />
         </div>
     </router-link>

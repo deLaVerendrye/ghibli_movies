@@ -72,9 +72,6 @@ export default{
   <ul class="nav py-2 px-4 justify-content-center">
     <li class="nav-item">
       <div class="input-group">
-        <router-link :to="{name: 'movie'} + '/12345'" custom v-slot="{navigate}">
-            <button @click="navigate" class="btn btn-secondary" >About</button>
-        </router-link>
         <input type="text" v-model="search"  class="form-control custom-input" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
       </div>
     </li>
