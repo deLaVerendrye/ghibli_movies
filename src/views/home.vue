@@ -76,7 +76,10 @@ export default{
       </div>
     </li>
   </ul>
-  <h1 v-if="!grouped_movies" >Loading...</h1>
+  <div v-if="!grouped_movies" class="text-center" >
+    <img src="../assets/logo.gif" alt="">
+    <h3>Loading...</h3>
+  </div>
   <div v-else class="custom-row m-auto">
     <div v-for="movies in grouped_movies" class="row m-2 justify-content-center">
       <rows :movies="movies" :length="filteredMovies.length"/>

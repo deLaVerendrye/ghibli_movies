@@ -1,6 +1,7 @@
 .bg-image {
   background-image: url("https://studioghiblimovies.com/wp-content/uploads/2020/03/p08192c7.jpg");
-  filter: blur(8px);
+  -webkit-filter: blur(8px);
+          filter: blur(8px);
   background-size: cover;
   height: 100%;
   width: 100%;
@@ -9,6 +10,7 @@
 }
 
 .container-sm {
-  background-image: rgb(0, 0, 0);
+  background-image: black;
   background-image: rgba(0, 0, 0, 0.4);
-}/*# sourceMappingURL=style.css.map */
+}
+/*# sourceMappingURL=style.css.map */

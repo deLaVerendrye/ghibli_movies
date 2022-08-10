@@ -14,7 +14,7 @@ export default{
         <div class="image_div" >
             <img :src="image_src" :alt="title + ' poster'" class="card-img-top">
         </div>
-        <div class="card-body text-light">
+        <div class="card-body bg-custom text-light">
             <p class="card-text">{{title}} {{date_release}}</p>
             <p>by {{director}}</p>
         </div>
@@ -49,7 +49,6 @@ img:hover{
     max-width: 15rem;
     overflow: hidden;
     max-height: 30rem;
-    background-color: #39321a;
 }
 
 .card:hover{
@@ -60,6 +59,10 @@ img:hover{
     height: 7.5rem;
     max-height: 7.5rem;
     overflow: hidden;
+}
+
+.bg-custom{
+    background-color:  #716844;
 }
 
 </style>
